@@ -7,32 +7,22 @@ Created on 22.09.2020
 
 from websocket import create_connection
 import json
-
-request_by_auth = '''{
-    "method" : "auth",
-    "type" : "password",
-    "login" : "admin",
-    "password" : "admin"
-}'''
+import argparse
 
 request_unsecured = '''{
     "method" : "auth",
     "type" : "unsecured"
 }'''
 
-def simple_call(peerId: str):
+def simple_call(room_ip: str, trueconf_id: str):
     # create connection
-    ws = create_connection("ws://10.110.14.168:8765")
-    print("Sending...")
+    ws = create_connection("ws://%s:8765" % room_ip)
     ws.send(request_unsecured)
-    print("Sent")
-    
-    print("Receiving...")
     result =  ws.recv()
     print("Received '%s'" % result)
     
     # make a command        
-    command = {"method": "call", "peerId": peerId}
+    command = {"method": "call", "peerId": trueconf_id}
     # send the command
     ws.send(json.dumps(command))
     # result
@@ -44,4 +34,13 @@ def simple_call(peerId: str):
 
 
 if __name__ =='__main__':
-    simple_call("azobov@team.trueconf.com")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-room_ip", dest = "room_ip",
+                    help = "Room IP", type = str)
+    parser.add_argument("-trueconf_id", dest = "trueconf_id",
+                    help = "User ID", type = str)
+    args = parser.parse_args()
+    room_ip = args.room_ip
+    trueconf_id = args.trueconf_id
+    # call
+    simple_call(room_ip, trueconf_id)
