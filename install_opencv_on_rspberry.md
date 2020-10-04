@@ -19,7 +19,7 @@ cmake -D CMAKE_BUILD_TYTE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_E
 make -j4
 sudo make install
 ```
-= Test
+# Test
 ```
 pi@raspberrypi:~ $ python
 Python 2.7.16 (default, Oct 10 2019, 22:02:15) 
