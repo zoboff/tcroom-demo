@@ -1,3 +1,4 @@
+```
 sudo apt-get install build-essential cmake pkg-config
 sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
 # sudo apt-get install libavcodec-dev libavformat-dev libswscale-devlibv41-dev
@@ -17,10 +18,9 @@ cd build
 cmake -D CMAKE_BUILD_TYTE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-master/modules -D BUILD_EXAMPLES=ON ..
 make -j4
 sudo make install
-
-=======
+```
 = Test
-=======
+```
 pi@raspberrypi:~ $ python
 Python 2.7.16 (default, Oct 10 2019, 22:02:15) 
 [GCC 8.3.0] on linux2
@@ -34,3 +34,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import cv2
 >>> 
 pi@raspberrypi:~ $ 
+```
