@@ -45,7 +45,7 @@ if __name__ =='__main__':
     pin = input('Enter PIN: ')
     
     try:
-        room = tcroom.make_connection_to_room(room_ip, pin)
+        room = tcroom.make_connection(room_ip, pin)
     except Exception as e:
         print(e)
 
@@ -67,7 +67,7 @@ if __name__ =='__main__':
         except Exception as e:
             print(e)
     
-        room.close_connection()
+        room.disconnect()
     # ===============================================
 
     del room

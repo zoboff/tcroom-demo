@@ -8,7 +8,7 @@ if __name__ == "__main__":
     pin = "123" #input('Enter PIN: ')
 
     try:
-        room = tcroom.make_connection_to_room(room_ip, pin)
+        room = tcroom.make_connection(room_ip, pin)
     
         room.call("azobov@team.trueconf.com")
     
