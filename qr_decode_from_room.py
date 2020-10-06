@@ -3,7 +3,6 @@ from pyzbar.pyzbar import decode
 import requests
 import os, time
 import tcroom
-from asyncio.tasks import sleep
 
 URL_PICTURE = "http://{}:8766/frames/?peerId=%23self%3A0&token={}"
 OUT_FILE = "tmp_picture_from_room.jpg"
@@ -42,20 +41,15 @@ def load_picture_from_room(room_ip: str, tokenForHttpServer: str) -> bool:
 
 
 if __name__ =='__main__':
-    room_ip = input('Enter IP for TrueConf Room: ')
+    room_ip = input('Enter TrueConf Room IP address: ')
     pin = input('Enter PIN: ')
     
-    room = tcroom.Room(debug_mode=True)
     try:
-        room.create_connection(room_ip, pin)
-        
-        # wait for connection
-        while not room.isConnected():
-            pass
+        room = tcroom.make_connection_to_room(room_ip, pin)
     except Exception as e:
         print(e)
 
-    if room.isConnected():
+    if room.isReadyToWork():
         try:
             while True:
                 file_name = load_picture_from_room(room_ip, room.getTokenForHttpServer())
@@ -73,9 +67,7 @@ if __name__ =='__main__':
         except Exception as e:
             print(e)
     
-        if room.isConnected():
-            room.getLogin() # like an empty command
-            room.close_connection()
+        room.close_connection()
     # ===============================================
 
     del room
