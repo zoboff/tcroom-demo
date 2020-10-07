@@ -12,7 +12,7 @@ if __name__ == "__main__":
     
         room.call("azobov@team.trueconf.com")
     
-        while room.isReadyToWork():
+        while room.isConnected():
             time.sleep(1)
 
     except KeyboardInterrupt:

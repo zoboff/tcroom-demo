@@ -49,7 +49,7 @@ if __name__ =='__main__':
     except Exception as e:
         print(e)
 
-    if room.isReadyToWork():
+    if room.isConnected():
         try:
             while True:
                 file_name = load_picture_from_room(room_ip, room.getTokenForHttpServer())
