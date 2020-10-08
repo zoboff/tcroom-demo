@@ -1,10 +1,8 @@
 from PIL import Image, UnidentifiedImageError
 from pyzbar.pyzbar import decode
-import requests
-import os, time
+import time
 import tcroom
 
-URL_PICTURE = "http://{}:8766/frames/?peerId=%23self%3A0&token={}"
 OUT_FILE = "tmp_picture_from_room.jpg"
 
 '''
@@ -30,16 +28,6 @@ def decode_file(file_name: str):
         print('type: {}; data: {}.'.format(data[0].type, data[0].data.decode("utf-8")))
 
 
-def load_picture_from_room(room_ip: str, tokenForHttpServer: str) -> bool:
-    url = URL_PICTURE.format(room_ip, tokenForHttpServer)
-    with open(os.path.join(OUT_FILE), 'wb') as out_stream:
-        req = requests.get(url, stream=True)
-        for chunk in req.iter_content(10240):
-            out_stream.write(chunk)
-    
-    return OUT_FILE
-
-
 if __name__ =='__main__':
     room_ip = input('Enter TrueConf Room IP address: ')
     pin = input('Enter PIN: ')
@@ -49,10 +37,10 @@ if __name__ =='__main__':
     except Exception as e:
         print(e)
 
-    if room.isConnected():
+    if room and room.isConnected():
         try:
             while True:
-                file_name = load_picture_from_room(room_ip, room.getTokenForHttpServer())
+                file_name = room.save_picture_selfview_to_file(OUT_FILE)
     
                 try:
                     decode_file(file_name)
