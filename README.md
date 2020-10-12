@@ -23,5 +23,6 @@ Run script:
 ```
 python qr_decode_from_room.py 
 
-Enter TrueConf Room IP address: 127.0.0.1                                                                                                                                                                            Enter PIN: 123                                                                                                                                                                                                       ```
+Enter TrueConf Room IP address: 127.0.0.1
+Enter PIN: 123                                                                                                                                                                                                       ```
 You can terminate that script by pressing Ctrl+C
