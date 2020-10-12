@@ -2,6 +2,8 @@
 
 ## qr_decode_from_room.py
 
+Tested on Python 3.8.6.
+
 Install the required modules
 
 ```
