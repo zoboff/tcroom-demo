@@ -2,7 +2,7 @@
 
 ## qr_decode_from_room.py
 
-Install required modules
+Install the required modules
 
 ```
 pip install pillow
