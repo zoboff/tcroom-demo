@@ -21,7 +21,7 @@ With a command line like this:
 Run script:
 
 ```
-python qr_decode_from_room.py 
+c:\this_project>python qr_decode_from_room.py 
 
 Enter TrueConf Room IP address: 127.0.0.1
 Enter PIN: 123
