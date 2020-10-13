@@ -29,3 +29,7 @@ Enter TrueConf Room IP address: 127.0.0.1
 Enter PIN: 123
 ```
 You can terminate that script by pressing Ctrl+C
+
+### How to use "qr_decode_from_room.py"
+
+Bring the picture with the QR-code or Barcode up to the webcam. And you may see something on the console...
