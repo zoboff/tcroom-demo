@@ -32,12 +32,13 @@ if __name__ =='__main__':
     room_ip = input('Enter TrueConf Room IP address: ')
     pin = input('Enter PIN: ')
     
+    room = None
     try:
         room = tcroom.make_connection(room_ip, pin)
     except Exception as e:
         print(e)
 
-    if room and room.isConnected():
+    if room:
         try:
             while True:
                 file_name = room.save_picture_selfview_to_file(OUT_FILE)
@@ -56,6 +57,5 @@ if __name__ =='__main__':
             print(e)
     
         room.disconnect()
-    # ===============================================
 
-    del room
+        del room
