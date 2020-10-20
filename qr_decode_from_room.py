@@ -1,4 +1,4 @@
-from PIL import Image, UnidentifiedImageError
+from PIL import Image, UnidentifiedImageError, ImageOps
 from pyzbar.pyzbar import decode
 import time
 import tcroom
@@ -11,8 +11,8 @@ OUT_FILE = "tmp_picture_from_room.jpg"
     {
       "action": "connect",
       "server": "team.trueconf.com",
-      "peerId": "125000@trueconf.com",
-      "password": "90127630279365128736512897635412983745610"
+      "peerId": "",
+      "password": ""
     },
     {
       "action": "call",
@@ -23,9 +23,18 @@ OUT_FILE = "tmp_picture_from_room.jpg"
 '''
 
 def decode_file(file_name: str):
-    data = decode(Image.open(file_name))
+    
+    def decode2(image):
+        data = decode(image)
+        if not data:
+            data = decode(ImageOps.mirror(image)) # mirror
+            
+        return data
+    
+    img = Image.open(file_name)
+    data = decode2(img)
     if data:
-        print('type: {}; data: {}.'.format(data[0].type, data[0].data.decode("utf-8")))
+        print(f'type: {data[0].type}; data: {data[0].data.decode("utf-8")}.', )
 
 
 if __name__ =='__main__':
