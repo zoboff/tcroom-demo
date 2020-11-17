@@ -43,7 +43,7 @@ if __name__ =='__main__':
     
     room = None
     try:
-        room = tcroom.make_connection(room_ip, pin)
+        room = tcroom.make_connection(room_ip=room_ip, pin=pin)
     except Exception as e:
         print(e)
 
