@@ -32,4 +32,15 @@ You can terminate that script by pressing Ctrl+C
 
 ### How to use "qr_decode_from_room.py"
 
-Bring the picture with the QR-code or Barcode up to the webcam. And you may see something on the console...
+#### Launch TrueConf Room application with *pin* param
+
+Command line example: 
+```
+"C:\Program Files\TrueConf\Room\TrueConfRoom.exe" -pin "123"
+```
+
+#### Set "Enhance quality of the video displayed in the control panel"
+
+![evq](https://user-images.githubusercontent.com/33928051/109476259-ba515c80-7a87-11eb-89e6-7e51622a783f.png)
+
+#### Bring the picture with the QR-code or Barcode up to the webcam. And you may see something on the console...
