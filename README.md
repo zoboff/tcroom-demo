@@ -43,4 +43,6 @@ Command line example:
 
 ![evq](https://user-images.githubusercontent.com/33928051/109476259-ba515c80-7a87-11eb-89e6-7e51622a783f.png)
 
+#### Run *qr_decode_from_room.py* script
+
 #### Bring the picture with the QR-code or Barcode up to the webcam. And you may see something on the console...
