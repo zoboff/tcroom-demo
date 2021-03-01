@@ -5,23 +5,6 @@ import tcroom
 
 OUT_FILE = "tmp_picture_from_room.jpg"
 
-'''
-{
-  "actions": [
-    {
-      "action": "connect",
-      "server": "team.trueconf.com",
-      "peerId": "",
-      "password": ""
-    },
-    {
-      "action": "call",
-      "peerId": "azobov@team.trueconf.com"
-    }
-  ]
-}
-'''
-
 def decode_file(file_name: str):
     
     def decode2(image):
