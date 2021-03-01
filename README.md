@@ -45,4 +45,8 @@ Command line example:
 
 #### Run *qr_decode_from_room.py* script
 
+Enter *IP* and *PIN*
+
+![rsq](https://user-images.githubusercontent.com/33928051/109477082-ad813880-7a88-11eb-8f5d-8c118a8f78b2.png)
+
 #### Bring the picture with the QR-code or Barcode up to the webcam. And you may see something on the console...
