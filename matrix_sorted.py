@@ -7,6 +7,7 @@ import time
 import asyncio
 from asyncio.coroutines import _is_debug_mode
 import threading
+from operator import itemgetter
 
 ROOM_IP = '127.0.0.1'
 PIN = '123'
@@ -54,9 +55,14 @@ def main():
                 if flag_matrix_changed:
                     mx = flag_matrix_changed
                     flag_matrix_changed = None
+                    # list of participants
+                    participants = data["participants"]
+                    # Sorted by display name
+                    participants = sorted(participants, key=itemgetter('peerDn'))
                     # Make the users list
-                    users = [participant["peerId"] for participant in data["participants"] if participant["peerId"] != mx[1]]
-                    users = [mx[1]] + sorted(users)
+                    users = [participant["peerId"] for participant in participants if participant["peerId"] != mx[1]]
+                    # First remains the first
+                    users = [mx[1]] + users
                     # Change matrix
                     room.changeVideoMatrix(mx[0], users)
                     c.notify_all()
