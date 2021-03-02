@@ -8,6 +8,7 @@ import asyncio
 from asyncio.coroutines import _is_debug_mode
 import threading
 from operator import itemgetter
+from urllib3.exceptions import ConnectionError
 
 ROOM_IP = '127.0.0.1'
 PIN = '123'
@@ -74,21 +75,56 @@ def main():
         await asyncio.sleep(0.1)
     # ==================================================================================
 
-    room = tcroom.make_connection(room_ip = ROOM_IP, pin = PIN, cb_OnEvent = on_event, cb_OnMethod = on_method)
+    while True:
+        try:
+            print("Connecting to TrueConf Room...")
+            room = tcroom.make_connection(room_ip = ROOM_IP, pin = PIN, cb_OnEvent = on_event, cb_OnMethod = on_method)
+            print("Succesfully connected")
+        # try again 
+        except tcroom.ConnectToRoomException as e:
+            print(f'ConnectToRoomException.')
+            print('Try again...')
+            time.sleep(1)
+            continue # connection again
+        #
+        except Exception as e:
+            print(f'Exception "{e.__class__.__name__}" in {__file__}:{sys._getframe().f_lineno}: {e}')
+            break
+        #
+        except KeyboardInterrupt:
+            print('Exit by the Ctrl + c')
+            break
 
-    try:
-        while room.isConnected():
-            time.sleep(0.3)
-    except KeyboardInterrupt:
-        print('Exit by the Ctrl + c')
-    except tcroom.RoomException:
-        print('Room error.')
-    except Exception as e:
-        print(e)
+        try:
+            print("Started!")
+            
+            # Main loop
+            while True:
+                time.sleep(1)
 
-    room.disconnect()
-    del room    
-
+        except KeyboardInterrupt:
+            print('Exit by the Ctrl + c')
+            break
+        except tcroom.RoomException as e:
+            print(f'Room error: {e}')
+            break
+        # Room is off
+        except ConnectionError as e:
+            print('ConnectionError')
+            print('Try again...')
+            continue # connection again
+        except tcroom.ConnectToRoomException as e:
+            print('ConnectToRoomException')
+            print('Try again...')
+            continue # connection again
+        except Exception as e:
+            if e.__class__.__name__ == 'ConnectionError':
+                print('ConnectionError 2')
+                print('Try again...')
+                continue # connection again
+            else:
+                print(f'Unhandled exception: "{e.__class__.__name__}" in {__file__}:{sys._getframe().f_lineno}: {e}')
+                continue # connection again
 
 if __name__ =='__main__':
   main()
