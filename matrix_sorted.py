@@ -23,39 +23,47 @@ def main():
 
         if name == "videoMatrixChanged":
             users = [participant["peerId"] for participant in data["participants"]]
-            room.requestConferenceParticipants()
             if len(users) > 2:
                 my_id = room.getMyId()
+
+                # Reaplace SELF_VIEW_SLOT to my ID
+                # users - list of all users
                 if my_id:
                     for i, user in enumerate(users):
                         if tcroom.SELF_VIEW_SLOT == user:
                            users[i] = my_id
     
                 c.acquire()
-                flag_matrix_changed = [data["matrixType"], users[0]]
+                # Save matrixType & first user
+                flag_matrix_changed = [data["matrixType"], users[0]]                
                 c.notify_all()
                 c.release()
-                
-                #room.changeVideoMatrix(data["matrixType"], users)
+
+                # Request for activate
+                room.requestConferenceParticipants()
 
         await asyncio.sleep(0.1)
     # ==================================================================================
     async def on_method(name, data):
         global flag_matrix_changed
         
-        if room.getAppState() == 5 and name == "getConferenceParticipants":
-            c.acquire()
-            if flag_matrix_changed:
-                mx = flag_matrix_changed
-                users = [participant["peerId"] for participant in data["participants"] if participant["peerId"] != mx[1]]
-                users = [mx[1]] + sorted(users)
-                flag_matrix_changed = None
-                room.changeVideoMatrix(mx[0], users)
-                c.notify_all()
-            else:
-                c.wait()
-            c.release()
-            
+        try:
+            if room.getAppState() == 5 and name == "getConferenceParticipants":
+                c.acquire()
+
+                if flag_matrix_changed:
+                    mx = flag_matrix_changed
+                    flag_matrix_changed = None
+                    # Make the users list
+                    users = [participant["peerId"] for participant in data["participants"] if participant["peerId"] != mx[1]]
+                    users = [mx[1]] + sorted(users)
+                    # Change matrix
+                    room.changeVideoMatrix(mx[0], users)
+                    c.notify_all()
+
+                c.release()
+        except Exception as e:
+            print(f'Error in on_method: {e}')
 
         await asyncio.sleep(0.1)
     # ==================================================================================
