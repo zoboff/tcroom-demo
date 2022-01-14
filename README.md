@@ -9,7 +9,7 @@ Install the required modules
 ```
 pip install pillow
 pip install pyzbar
-pip install websocket-client
+pip install websocket-client==0.58
 pip install requests
 ```
 
