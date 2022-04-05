@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//room-assistant-titov/room_watcher.py=utf8
+encoding//tcroom/__init__.py=utf8
+encoding/call.py=utf8
+encoding/call_by_qr_conference.py=utf8
+encoding/create_conference.py=utf8
+encoding/matrix_sorted.py=utf8
+encoding/mqtt_to_room.py=utf8
+encoding/nfc_kiosk.py=utf8
+encoding/on_change_state.py=utf8
+encoding/on_video_matrix_changed.py=utf8
+encoding/set_ptz.py=utf8
+encoding/simple_call.py=utf8
+encoding/video_matrix_changed.py=utf8

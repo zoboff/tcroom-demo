@@ -1,0 +1,25 @@
+﻿{
+  "matrixType": 2,
+  "mainWindowWidth": 250,
+  "mainWindowHeight": 974,
+  "participants": [
+    {
+      "peerId": "VideoCaptureSlot",
+      "peerDn": "125001 sss ыыы หหห",
+      "left": 0,
+      "top": 347,
+      "width": 250,
+      "height": 140
+    },
+    {
+      "peerId": "azobov@team.trueconf.com",
+      "peerDn": "azobov@team.trueconf.com",
+      "left": 0,
+      "top": 487,
+      "width": 250,
+      "height": 140
+    }
+  ],
+  "event": "videoMatrixChanged",
+  "method": "event"
+}

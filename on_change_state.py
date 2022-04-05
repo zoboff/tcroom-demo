@@ -14,11 +14,23 @@ async def on_incoming_message(fromId, fromDn, msg):
     print(f"Message - fromId: {fromId}, fromDn: {fromDn}, msg: {msg}")
     await asyncio.sleep(0.1)
 
+async def on_method(method, response):    
+    print(f"Method: {method}")
+    print(f"  Response: {response}")
+    await asyncio.sleep(0.1)
+
+async def on_event(event, response):    
+    print(f"Event: {event}")
+    print(f"  Response: {response}")
+    await asyncio.sleep(0.1)
+
 def main():
     room_ip = input('Enter TrueConf Room IP address: ')
     pin = input('Enter PIN: ')
 
-    room = tcroom.make_connection(pin=pin, room_ip=room_ip, cb_OnChangeState=on_change_state, cb_OnIncomingMessage=on_incoming_message)
+    room = tcroom.make_connection(pin=pin, room_ip=room_ip, 
+                                  cb_OnChangeState=on_change_state, cb_OnIncomingMessage=on_incoming_message, 
+                                  cb_OnMethod=on_method, cb_OnEvent=on_event)
 
     try:
         while room.isConnected():

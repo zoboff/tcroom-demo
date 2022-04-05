@@ -4,10 +4,10 @@ import time
 import tcroom
 import sys
 
-ROOM_NAME = "room"
+ROOM_NAME = "blueroom"
 MQTT_BROKER = "10.110.14.168"
 MQTT_USER = "mqtt"
-MQTT_PASSWORD = "mqtt"
+MQTT_PASSWORD = "16121993"
 
 CONNECTION_SUCCESSFULLY = False
 

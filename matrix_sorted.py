@@ -10,8 +10,9 @@ import threading
 from operator import itemgetter
 from urllib3.exceptions import ConnectionError
 
-ROOM_IP = '127.0.0.1'
-PIN = '123'
+ROOM_IP = '10.110.14.56'
+PIN = '1812'
+PORT = 80
 
 flag_matrix_changed = None 
 
@@ -78,7 +79,7 @@ def main():
     while True:
         try:
             print("Connecting to TrueConf Room...")
-            room = tcroom.make_connection(room_ip = ROOM_IP, pin = PIN, cb_OnEvent = on_event, cb_OnMethod = on_method)
+            room = tcroom.make_connection(room_ip = ROOM_IP, pin = PIN, port = PORT, cb_OnEvent = on_event, cb_OnMethod = on_method)
             print("Succesfully connected")
         # try again 
         except tcroom.ConnectToRoomException as e:
